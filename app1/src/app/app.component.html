@@ -1,2 +1,13 @@
 <app-topo></app-topo>
-<app-painel></app-painel>
+<app-painel *ngIf="vitoria === undefined" (encerrar)="aoEncerrar($event)"></app-painel>
+<div *ngIf="vitoria !== undefined" class="row justify-content-center" style="margin-top: 10px;">
+  <div class="col-12">
+    <h1 style="text-align: center;" *ngIf="vitoria === 'true'">Você venceu</h1>
+    <h1 style="text-align: center;" *ngIf="vitoria === 'false'">Você perdeu</h1>
+  </div>
+  <div class="col-12">
+    <button style="margin: auto; display: table;" class="btn btn-primary" (click)="reiniciarJogo()">
+      Reiniciar jogo
+    </button>
+  </div>
+</div>
