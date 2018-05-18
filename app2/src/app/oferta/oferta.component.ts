@@ -19,9 +19,15 @@ export class OfertaComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.ofertasService
-      .getOfertaById(this.activatedRoute.snapshot.params.id)
-      .then((oferta: Oferta) => (this.oferta = oferta))
-      .catch((err: Error) => console.log(err));
+    this.activatedRoute.params.subscribe(
+      (params: any) => {
+        this.ofertasService
+          .getOfertaById(params.id)
+          .then((oferta: Oferta) => (this.oferta = oferta))
+          .catch((err: Error) => console.log(err))
+      },
+      (error: Error) => {
+        console.log("error ", error);
+      });
   }
 }
