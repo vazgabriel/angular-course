@@ -1,5 +1,6 @@
 import { ActivatedRoute } from "@angular/router";
 import { Component, OnInit } from "@angular/core";
+import { Observable, interval, Observer } from "rxjs";
 
 import { Oferta } from "./../shared/oferta.model";
 
@@ -28,6 +29,14 @@ export class OfertaComponent implements OnInit {
       },
       (error: Error) => {
         console.log("error ", error);
+      });
+
+      const observableTeste = Observable.create((observer: Observer<any>) => {
+        observer.next('teste');
+      });
+
+      observableTeste.subscribe((param: any) => {
+        console.log("param ", param);
       });
   }
 }
