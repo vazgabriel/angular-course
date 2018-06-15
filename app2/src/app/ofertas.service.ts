@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs';
+import { map, retry } from 'rxjs/operators';
 import { Http } from "@angular/http";
 import { Injectable } from "@angular/core";
 
@@ -25,4 +27,10 @@ export class OfertasService {
       .toPromise()
       .then((resposta: any) => resposta.json());
   }
+
+  public pesquisaOfertas(termo: string): Observable<Oferta[]> {
+    return this.http.get(`${this.urlApi}?descricao_oferta_like=${termo}`)
+      .pipe(retry(10), map((res: any) => res.json()));
+  }
+
 }
